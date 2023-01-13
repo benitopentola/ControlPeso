@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Control de Peso</title>
+    <style>
+      /* Estilos para la tabla */
+      table {
+        border-collapse: collapse;
+        width: 80%;
+        margin: 0 auto;
+      }
+
+      th, td {
+        border: 1px solid black;
+        padding: 10px;
+        text-align: center;
+      }
+
+      /* Estilos para el botón */
+      button {
+        padding: 10px 20px;
+        background-color: green;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin: 10px auto;
+        display: block;
+      }
+
+      /* Estilos para el formulario */
+      form {
+        text-align: center;
+        margin: 20px auto;
+        width: 80%;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Control de Peso</h1>
+    <form>
+      <label for="weight-input">Ingresa tu peso (en kg):</label>
+      <input type="number" id="weight-input" name="weight-input">
+      <button type="button" onclick="addWeight()">Agregar</button>
+    </form>
+    <table id="weight-table">
+      <tr>
+        <th>Fecha</th>
+        <th>Peso (kg)</th>
+        <th>Adelgazando</th>
+      </tr>
+    </table>
+    <script>
+      // Variables para almacenar el peso y la tabla
+      let weight = 0;
+      let weightTable = document.getElementById("weight-table");
+
+      // Función para agregar peso a la tabla
+      function addWeight() {
+        // Obtener el peso ingresado
+        let weightInput = document.getElementById("weight-input");
+        let newWeight = weightInput.value;
+        // Validar que el peso sea válido
+        if (newWeight <= 0) {
+          alert("Ingresa un peso válido");
+          return;
+        }
+        // Crear una nueva fila en la tabla
+        let row = weightTable.insertRow(-1);
+        let dateCell = row.insertCell(0);
+        let weightCell = row.insertCell(1);
+        let statusCell = row.insertCell(2);
+        // Agregar la fecha actual
+        let date = new Date();
+        dateCell.innerHTML = date.toLocaleDateString();
+        // Agregar el peso ingresado
+        weightCell.innerHTML = newWeight;
+        // Verificar si está adelgazando
+        if (weight != 0 && newWeight < weight) {
+          statusCell.innerHTML = "Sí";
+          statusCell.style.color = "green";
+		  statusCell.style.color = "green";
+} else {
+statusCell.innerHTML = "No";
+statusCell.style.color = "red";
+}
+// Actualizar la variable de peso
+weight = newWeight;
+// Limpiar el campo de peso
+weightInput.value = "";
+}
+</script>
+
+  </body>
+</html>
